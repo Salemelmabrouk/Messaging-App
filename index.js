@@ -11,10 +11,10 @@ const port = 3000
 app.use(express.json())
 app.use(userRouter)
 app.use("/messages",messageRouter)
-app.get('/verify/:email',  async (req,res) => { 
-    await User.findOneAndUpdate({email: req.params.email}, {verified: true})
-    res.json({message: "Email verified successfully"})
- })
+   //app.get('/verify/:email',  async (req,res) => { 
+  //  await User.findOneAndUpdate({email: req.params.email}, {verified: true})
+  //  res.json({message: "Email verified successfully"})
+// })
 
 dbConnection()
 app.get('/', (req, res) => res.send('Hello World!'))

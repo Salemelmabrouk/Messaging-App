@@ -12,11 +12,12 @@ export const signup = async (req, res) => {
             return res.json({ message: "Email already exists" });
         }
        let hashedPassword =  bcrypt.hashSync(password,8); 
- 
+
+    
      User.insertMany({ name, email, password: hashedPassword,age});
      sendEmail({email})
-    res.json({ message: "User created successfully" });
-    } catch (error) {    
+     res.json({ message: "User created successfully" });
+       } catch (error) {    
         console.log(error);
         res.json({ message: "Internal Server Error" });
     }
@@ -42,4 +43,18 @@ export const signin= async (req, res) => {
         console.log(error);
         res.json({ message: "Internal Server Error" });
     }
-}
+
+
+  
+}  
+
+
+export const verifyemail= async (req,res) => { 
+    const {token}=req.params
+    jwt.verify(token,process.env.JWT_SECRET,async(err,decoded) => {
+        if(err)  return res.json( err ) 
+          await User.findOneAndUpdate({email: decoded.email}, {verified: true})
+        res.json({message: "Email verified successfully"})   
+        }) 
+        
+     }

@@ -1,4 +1,4 @@
-export const htmlCode= (link) => {   
+export const htmlCode= (token) => {   
     return ` <!DOCTYPE html>
 <html>
 <head>
@@ -181,7 +181,7 @@ export const htmlCode= (link) => {
                     <table border="0" cellpadding="0" cellspacing="0">
                       <tr>
                         <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                          <a href="${link}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Verify Email</a>
+                          <a href="${token}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Verify Email</a>
                         </td>
                       </tr>
                     </table>
