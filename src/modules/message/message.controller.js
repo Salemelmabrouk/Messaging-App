@@ -1,4 +1,5 @@
 import { Message } from "../../../models/message.model.js";
+import { sendEmail } from "../../emails/nodemailer.js";
 
  
 
@@ -16,14 +17,11 @@ export const addMessage = async (req, res) => {
 
 
 export const getUserMessage = async (req, res) => {
-    try {
-      const { recivedId } = req.body; 
-    const messages = await Message.find({ recivedId }  
+
+  
+    const messages = await Message.find({ recivedId:req.userId }  
     )
     res.json({ message: "Message loaded successfully" , messages });
-      } 
-      catch (error) {   
-          console.log(error);
-          res.json({ error: "Something went wrong" });
-      }
+    
+     
   };

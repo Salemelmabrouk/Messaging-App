@@ -1,6 +1,7 @@
 import { User } from "../../../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { sendEmail } from "../../emails/nodemailer.js";
 
 
 export const signup = async (req, res) => {
@@ -13,6 +14,7 @@ export const signup = async (req, res) => {
        let hashedPassword =  bcrypt.hashSync(password,8); 
  
      User.insertMany({ name, email, password: hashedPassword,age});
+     sendEmail({email})
     res.json({ message: "User created successfully" });
     } catch (error) {    
         console.log(error);
@@ -26,7 +28,7 @@ export const signin= async (req, res) => {
         const user =await User.findOne({ email });
         if (user && bcrypt.compareSync(password, user.password)) {
 
-   let token=jwt.sign({name:user.name,userId:user._id},'MyNameIsSalem', );
+   let token=jwt.sign({name:user.name,userId:user._id},process.env.JWT_SECRET );
         
               return  res.json({ message: "logged token" ,token:token});
 
